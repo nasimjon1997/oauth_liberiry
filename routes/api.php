@@ -15,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 Route::post('/register', 'App\Http\Controllers\Api\AuthController@register');
 Route::post('/login', 'App\Http\Controllers\Api\AuthController@login');
-Route::get('/profile', 'App\Http\Controllers\Api\AuthController@profile')->middleware('auth:api');
+Route::get('/products', 'App\Http\Controllers\Api\ProductController@index');

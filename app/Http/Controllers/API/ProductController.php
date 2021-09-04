@@ -4,18 +4,26 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\CEO;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
-class JobTitlesController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $products = Product::with('compositions')->where('parent_id',null);
+        if ($request->has('search')){
+            $products->where('name', 'like', '%' . $request->get('search'). '%');
+            $products->orWhere('short_description', 'like', '%' . $request->get('search'). '%');
+            $products->orWhere('description', 'like', '%' . $request->get('search'). '%');
+        }
+        $products = $products->paginate(25);
+        return response()->json($products);
     }
 
     /**
@@ -27,17 +35,6 @@ class JobTitlesController extends Controller
     public function store(Request $request)
     {
       //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\CEO  $ceo
-     * @return \Illuminate\Http\Response
-     */
-    public function show(CEO $ceo)
-    {
-        //
     }
 
     /**

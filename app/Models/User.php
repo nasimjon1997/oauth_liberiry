@@ -45,6 +45,6 @@ class User extends Authenticatable
     ];
     public function job()
     {
-        return $this->belongsTo(JobTitle::class,'job_title_id');
+        return $this->belongsTo(Product::class,'job_title_id');
     }
 }

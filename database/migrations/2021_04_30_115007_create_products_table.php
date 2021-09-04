@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateJobTitlesTable extends Migration
+class CreateProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateJobTitlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('job_titles', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->text('short_description')->nullable();
+            $table->text('description')->nullable();
+            $table->bigInteger('parent_id')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
